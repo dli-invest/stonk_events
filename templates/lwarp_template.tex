@@ -1,0 +1,105 @@
+
+% Save this as tutorial.tex for the lwarp package tutorial.
+
+\documentclass{book}
+
+\usepackage{iftex}
+
+% --- LOAD FONT SELECTION AND ENCODING BEFORE LOADING LWARP ---
+
+\ifPDFTeX
+\usepackage{lmodern}            % pdflatex or dvi latex
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\else
+\usepackage{fontspec}           % XeLaTeX or LuaLaTeX
+\fi
+
+% --- LWARP IS LOADED NEXT ---
+\usepackage[
+%   HomeHTMLFilename=index,     % Filename of the homepage.
+%   HTMLFilename={node-},       % Filename prefix of other pages.
+%   IndexLanguage=english,      % Language for xindy index, glossary.
+%   latexmk,                    % Use latexmk to compile.
+%   OSWindows,                  % Force Windows. (Usually automatic.)
+%   mathjax,                    % Use MathJax to display math.
+]{lwarp}
+% \boolfalse{FileSectionNames}  % If false, numbers the files.
+
+% --- LOAD PDFLATEX MATH FONTS HERE ---
+
+% --- OTHER PACKAGES ARE LOADED AFTER LWARP ---
+\usepackage{makeidx} \makeindex
+\usepackage{xcolor}             % (Demonstration purposes only.)
+\usepackage{hyperref,cleveref}  % LOAD THESE LAST!
+\usepackage[autostyle]{csquotes}
+\usepackage[final]{pdfpages}
+\newcommand{\onlineCite}{[Online] Available: }	% Used in BIBLIOGRAPHY 
+\usepackage[backend=bibtex,sorting=none]{biblatex}	% Sort by citation order, IEEE
+\addbibresource{src/preamble/references.bib}
+
+% --- LATEX AND HTML CUSTOMIZATION ---
+\title{Stonk Research}
+\author{davidli012345@gmail.com}
+\setcounter{tocdepth}{2}        % Include subsections in the \TOC.
+\setcounter{secnumdepth}{2}     % Number down to subsections.
+\setcounter{FileDepth}{1}       % Split \HTML\ files at sections
+\booltrue{CombineHigherDepths}  % Combine parts/chapters/sections
+\setcounter{SideTOCDepth}{1}    % Include subsections in the side\TOC
+\HTMLTitle{Stonk Research}       % Overrides \title for the web page.
+\HTMLAuthor{David Li}        % Sets the HTML meta author tag.
+\HTMLLanguage{en-US}            % Sets the HTML meta language.
+\HTMLDescription{Publicly available stonk research from me.}% Sets the HTML meta description.
+\HTMLFirstPageTop{David Li}
+% \HTMLPageTop{\fbox{LOGO}}
+\HTMLPageBottom{Contact: davidli012345@gmail.com - This is just my personal thoughts, all the reference I use should be cited.}
+\CSSFilename{lwarp_sagebrush.css}
+
+\usepackage{graphicx}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.7}
+\usepackage{tikz}
+
+% from pylatex
+\usepackage{lmodern}%
+\usepackage{textcomp}%
+\usepackage{lastpage}%
+\usepackage{booktabs}%
+\usepackage{amsmath}
+\begin{document}
+
+\maketitle                      % Or titlepage/titlingpage environment.
+
+% An article abstract would go here.
+
+ The reason I am using latex is to generate clean html documentation in lwarp with pdf support and citation + references. JupyterBook is a decent alternative.
+
+\tableofcontents                % MUST BE BEFORE THE FIRST SECTION BREAK!
+\listoffigures
+
+\input{src/content/sample.tex}
+\input{src/content/research.tex}
+
+\begin{warpprint}   % For print output ...
+\cleardoublepage    % ... a common method to place index entry into TOC.
+\phantomsection
+\addcontentsline{toc}{chapter}{\indexname}
+\end{warpprint}
+\ForceHTMLPage      % HTML index will be on its own page.
+\ForceHTMLTOC       % HTML index will have its own toc entry.
+\printindex
+
+\begin{warpprint}   % For print output ...
+\cleardoublepage    % ... a common method to place index entry into TOC.
+\phantomsection
+\end{warpprint}
+
+\nocite{*}
+\printbibliography
+
+% \glsaddall
+% \printglossaries
+
+\end{document}

@@ -1,7 +1,7 @@
 import os
 import psycopg
 
-conn_dict =  psycopg.conninfo.conninfo_to_dict(os.environ["DATABASE_URL"])
+conn_dict =  psycopg.conninfo.conninfo_to_dict(os.environ["COCKROACH_DB_URL"])
 
 print(conn_dict)
 with psycopg.connect(**conn_dict) as conn:

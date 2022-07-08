@@ -1,0 +1,4 @@
+psycopg
+pandas
+lxml
+pylatex
