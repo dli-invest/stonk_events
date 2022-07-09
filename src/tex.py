@@ -1,7 +1,9 @@
+# all tex related stuff is in src/tex.py
 import numpy as np
 import pylatex as pl
 import pandas as pd
-from extract_calendar_events import split_tables
+from marketwatch import split_tables
+from utils import plot_df_as_table
 
 df = pd.DataFrame({'a': [1,2,3], 'b': [9,8,7]})
 df.index.name = 'x'
@@ -28,3 +30,8 @@ for index, df in enumerate(dfs):
         doc.append(pl.NoEscape(r'\end{adjustbox}'))
 
 doc.generate_tex('full')
+
+# test_table = dfs[2]
+# # trip Report column to 15 characters
+# test_table["Report"] = test_table["Report"].str.slice(0, 25)
+# plot_df_as_table(test_table)
