@@ -2,34 +2,41 @@
 import numpy as np
 import pylatex as pl
 import pandas as pd
-from marketwatch import split_tables
+from marketwatch import split_table, get_tables
 from utils import plot_df_as_table
 
-df = pd.DataFrame({'a': [1,2,3], 'b': [9,8,7]})
-df.index.name = 'x'
+def make_report( report_data: dict, file_name = "full"):
 
-M = np.matrix(df.values)
+    tables = report_data["tables"]
+    doc = pl.Document()
 
-doc = pl.Document()
+    doc.packages.append(pl.Package('booktabs'))
+    doc.packages.append(pl.Package('adjustbox'))
 
-doc.packages.append(pl.Package('booktabs'))
-doc.packages.append(pl.Package('adjustbox'))
+    dfs, captions = split_table(tables[0])
+    # Difference to the other answer:
 
-with doc.create(pl.Section('Matrix')):
-    doc.append(pl.Math(data=[pl.Matrix(M)]))
+    # first table
+    for index, df in enumerate(dfs):
+        with doc.create(pl.Table(position='htbp')) as table:
+            table.add_caption(captions[index])
+            table.append(pl.Command('centering'))
+            doc.append(pl.NoEscape(r'\begin{adjustbox}{width=1\textwidth}'))
+            table.append(pl.NoEscape(df.to_latex(escape=True, index=False, column_format='lcccccc')))
+            doc.append(pl.NoEscape(r'\end{adjustbox}'))
 
-dfs, captions = split_tables()
-# Difference to the other answer:
+    # second table, next weeks events
+    dfs, captions = split_table(tables[1])
 
-for index, df in enumerate(dfs):
-    with doc.create(pl.Table(position='htbp')) as table:
-        table.add_caption(captions[index])
-        table.append(pl.Command('centering'))
-        doc.append(pl.NoEscape(r'\begin{adjustbox}{width=1\textwidth}'))
-        table.append(pl.NoEscape(df.to_latex(escape=True, index=False, column_format='lcccccc')))
-        doc.append(pl.NoEscape(r'\end{adjustbox}'))
+    for index, df in enumerate(dfs):
+        with doc.create(pl.Table(position='htbp')) as table:
+            table.add_caption(captions[index])
+            table.append(pl.Command('centering'))
+            doc.append(pl.NoEscape(r'\begin{adjustbox}{width=1\textwidth}'))
+            table.append(pl.NoEscape(df.to_latex(escape=True, index=False, column_format='lcccccc')))
+            doc.append(pl.NoEscape(r'\end{adjustbox}'))
 
-doc.generate_tex('full')
+    doc.generate_tex(file_name)
 
 # test_table = dfs[2]
 # # trip Report column to 15 characters

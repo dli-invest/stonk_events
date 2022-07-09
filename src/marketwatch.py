@@ -13,11 +13,15 @@ def check_day(original_time):
     else:
         return None
 
-def split_tables(url = "https://www.marketwatch.com/economy-politics/calendar")-> Tuple[List[pd.DataFrame], List[str]]:
-
+def get_tables(url = "https://www.marketwatch.com/economy-politics/calendar"):
+    
     # extract calendar events from urls
     # for now only get the upcoming events for the current week
-    df = pd.read_html(url)[0]
+    dfs = pd.read_html(url)
+    return dfs
+
+def split_table(df)-> Tuple[List[pd.DataFrame], List[str]]:
+
 
     # split df into separate arrays based on values in column "Time (ET)"
     # split by MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY
@@ -61,7 +65,7 @@ def split_tables(url = "https://www.marketwatch.com/economy-politics/calendar")-
     return tables, event_times
     
 def main():
-    tables, event_times = split_tables()
+    tables, event_times = split_table()
     print(tables)
     print(event_times)
 # write tables to file
