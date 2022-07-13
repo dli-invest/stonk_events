@@ -12,4 +12,5 @@ with psycopg.connect(**conn_dict) as conn:
     conn.commit()
     # insert some data
     conn.execute("INSERT INTO events VALUES ('2020-01-01', 'New Year', 'Happy New Year', 'source', 'country', 'exchange', 'url', 'company')")
+    conn.execute("CREATE UNIQUE INDEX events_url_idx ON events (title, COALESCE(url, '00000000-0000-0000-0000-000000000000'))");
     print("Table events created")
