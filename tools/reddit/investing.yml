@@ -1,0 +1,27 @@
+data:
+  csvPath: ../../data/reddit_articles.csv
+  noMessage: true
+  subreddits:
+    - name: wallstreetbets
+      limit: 5
+      linkFlairText: Earnings Thread
+    - name: wallstreetbets
+      limit: 10
+      minScore: 15
+      minComments: 15
+      linkFlairText: DD
+    - name: Baystreetbets
+      limit: 5
+      linkFlairText: DD
+    - name: StockMarket
+      limit: 10
+      minScore: 20
+      minComments: 20
+      linkFlairText: Fundamentals/DD
+      phrases:
+        - Most Anticipated Earnings
+        - Most Anticipated Earnings Releases
+        - Wall Street Week Ahead
+        - Market close -
+    - name: Economics
+      limit: 10
