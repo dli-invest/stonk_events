@@ -15,4 +15,4 @@ def send_file(path: str) -> None:
     
 
 if __name__ == '__main__':
-    send_file("data/latest.pdf")
+    send_file("latest.pdf")
