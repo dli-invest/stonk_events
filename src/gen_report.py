@@ -8,8 +8,6 @@ from utils.parse_reddit import fetch_reddit_posts, parse_reddit_posts, make_dirs
 
 def main():
 
-    M = np.matrix(df.values)
-
     doc = pl.Document()
 
     doc.packages.append(pl.Package('booktabs'))
