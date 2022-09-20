@@ -1,0 +1,83 @@
+# setup python and setup golang github actions
+name: Generate Premarket Report
+on:
+  schedule:
+    # make this report at 6 AM PST
+    - cron: '0 13 * * 1-5'
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env: 
+  REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+  REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+  REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+  REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+  DISCORD_WEBHOOK: ${{ secrets.DISCORD_URGENT_NOTIFICATIONS_WEBHOOK}}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10.7
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd src
+          pip install -r requirements.txt
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.17.0'
+      - run: go version
+      - name: Generate Premarket Report
+        run: |
+          cd src
+          python gen_report.py
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update Premarket Report"
+          commit_options: '--no-verify'
+          commit_user_name: github-actions
+          
+      # in the future use a simplifed approach to commiting and pushing with multiple jobs
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: data/latest.tex
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: latest
+          path: data/latest.pdf
+
+      # TODO replace with my own code
+      # - name: send pdf to discord
+      #   uses: appleboy/discord-action@master
+      #   with:
+      #     webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+      #     webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+      #     file: data/latest.pdf
+      - name: Send report to discord
+        run:
+          python src/send_discord.py
+
+
+      - uses: sarisia/actions-status-discord@v1
+        if: failure()
+        with:
+          webhook: ${{ secrets.DISCORD_CODE_STATUS_WEBHOOK }}
+          status: ${{ job.status }}
+          title: ${{github.repository}}
+          description: "Failed to generate premarket report"
+          nofail: false
+          noprefix: false
+          color: 0xff0000
+          username: stonk_events

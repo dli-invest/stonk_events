@@ -2,3 +2,5 @@ psycopg
 pandas
 lxml
 pylatex
+jinja2
+requests
