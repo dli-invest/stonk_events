@@ -51,7 +51,7 @@ def main():
     make_dirs(base_folder)
     output_path = f"{base_folder}/report_{datetime.datetime.now().strftime('%Y_%m_%d')}_pre"
     doc.generate_tex(output_path)
-    doc.generate_tex("../data/latest.tex")
+    doc.generate_tex("../data/latest")
 
 if __name__ == '__main__':
     main()
