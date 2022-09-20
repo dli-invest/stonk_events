@@ -4,12 +4,9 @@ import pylatex as pl
 import pandas as pd
 import datetime
 from marketwatch import split_tables
-from utils.tex import plot_df_as_table
 from utils.parse_reddit import fetch_reddit_posts, parse_reddit_posts, make_dirs
 
 def main():
-    df = pd.DataFrame({'a': [1,2,3], 'b': [9,8,7]})
-    df.index.name = 'x'
 
     M = np.matrix(df.values)
 
@@ -17,9 +14,6 @@ def main():
 
     doc.packages.append(pl.Package('booktabs'))
     doc.packages.append(pl.Package('adjustbox'))
-
-    with doc.create(pl.Section('Matrix')):
-        doc.append(pl.Math(data=[pl.Matrix(M)]))
 
     dfs, captions = split_tables()
     # MARKET EVENTS
