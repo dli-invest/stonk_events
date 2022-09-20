@@ -1,7 +1,6 @@
 import re
 
 import pandas as pd
-import matplotlib.pyplot as plt
 from pandas.plotting import table
 
 def extract_tex_from_file(input_file: str, output_file: str):
@@ -35,20 +34,6 @@ def extract_tex_from_file(input_file: str, output_file: str):
         for match in matches:
             f.write("".join(match))
 
-def plot_df_as_table(df: pd.DataFrame, filename: str = "table.png")-> None:
-    """
-        Save
-    """
-    fig, ax = plt.subplots(figsize=(16, 2))
-    ax.xaxis.set_visible(False)  # hide the x axis
-    ax.yaxis.set_visible(False)  # hide the y axis
-    ax.set_frame_on(False)  # no visible frame, uncomment if size is ok
-    tabla = table(ax, df, loc='upper right', colWidths=[0.16]*len(df.columns))  # where df is your data frame
-    # tabla.auto_set_font_size(True) # Activate set fontsize manually
-    tabla.auto_set_font_size(False) # Activate set fontsize manually
-    tabla.set_fontsize(12) # if ++fontsize is necessary ++colWidths
-    tabla.scale(1.2, 1.2) # change size table
-    plt.savefig(filename, transparent=True)
 
 if __name__ == "__main__":
     extract_tex_from_file("full.tex", "content.tex")
