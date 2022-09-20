@@ -1,6 +1,6 @@
-from typing import Tuple, List
+# Figure out where to put this later
 import pandas as pd
-
+from typing import Tuple, List
 
 # global this, dont need best practice for side projects
 def check_day(original_time):

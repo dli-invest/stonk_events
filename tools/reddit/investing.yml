@@ -1,5 +1,5 @@
 data:
-  csvPath: ../../data/reddit_articles.csv
+  csvPath: ../../data/reddit/reddit_articles.csv
   noMessage: true
   subreddits:
     - name: wallstreetbets
