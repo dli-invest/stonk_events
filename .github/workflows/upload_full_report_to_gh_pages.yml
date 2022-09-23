@@ -22,6 +22,7 @@ jobs:
       - name: Build Pdf
         run: |
           mv tools/latexdockercmd.sh ../
+          ls tools/latexdockercmd.sh
           mv data/full_report.tex ../
           chmod +x ./latexdockercmd.sh
           ./latexdockercmd.sh /bin/sh -c "lualatex full_report.tex"
