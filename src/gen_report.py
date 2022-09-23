@@ -38,13 +38,12 @@ def main():
     if reddit_posts is not None and len(reddit_posts) > 0:
         df_posts = parse_reddit_posts(reddit_posts)
         # add reddit post to tex report
-        with doc.create(pl.Section('Reddit Posts')):
-            with doc.create(pl.Table(position='htbp')) as table:
-                table.append(pl.Command('centering'))
-                doc.append(pl.NoEscape(r'\begin{adjustbox}{width=1\textwidth}'))
-                # probably make some smartbox or text post instead.
-                table.append(pl.NoEscape(df_posts.to_latex(escape=True, index=False, columns=['title', 'url', 'linkFlairText'])))
-                doc.append(pl.NoEscape(r'\end{adjustbox}'))
+        with doc.create(pl.Table(position='htbp')) as table:
+            table.append(pl.Command('centering'))
+            doc.append(pl.NoEscape(r'\begin{adjustbox}{width=1\textwidth}'))
+            # probably make some smartbox or text post instead.
+            table.append(pl.NoEscape(df_posts.to_latex(escape=True, index=False, columns=['title', 'url', 'linkFlairText'])))
+            doc.append(pl.NoEscape(r'\end{adjustbox}'))
 
     # make dirs files
     curr_month = datetime.datetime.now().strftime("%B")
