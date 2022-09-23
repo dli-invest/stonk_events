@@ -1,0 +1,52 @@
+name: Build LaTeX document
+on: [push]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # setup python
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10.7
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd src
+          pip install -r requirements.txt
+      - name: create full tex file
+        run: |
+          cd src
+          python gen_full_report.py
+
+      - name: Build Pdf
+        run: |
+          mv tools/latexdockercmd.sh ../
+          mv data/full_report.tex ../
+          chmod +x ./latexdockercmd.sh
+          ./latexdockercmd.sh /bin/sh -c "lualatex full_report.tex"
+          ./latexdockercmd.sh /bin/sh -c "lualatex full_report.tex"
+          ./latexdockercmd.sh /bin/sh -c "lwarpmk printindex"
+          ./latexdockercmd.sh /bin/sh -c "lwarpmk print"
+          ./latexdockercmd.sh /bin/sh -c "lwarpmk htmlindex || true"
+          ./latexdockercmd.sh /bin/sh -c "lwarpmk html || true" 
+          ./latexdockercmd.sh /bin/sh -c "bibtex full_report_html"
+          ./latexdockercmd.sh /bin/sh -c "lwarpmk html1 || true" 
+          ./latexdockercmd.sh /bin/sh -c "lwarpmk limages || true"
+          ./latexdockercmd.sh /bin/sh -c "lwarpmk htmlindex || true" 
+          ./latexdockercmd.sh /bin/sh -c "bibtex full_report_html"
+          ./latexdockercmd.sh /bin/sh -c "lwarpmk html1 || true"
+          ./latexdockercmd.sh /bin/sh -c "lwarpmk html" 
+          mv full_report.html index.html || true
+          mkdir output
+          ls
+          mv *.html output/ && mv *.css output/
+          mkdir -p output/src
+          mv *.html output/ || true
+          cp -R src/media output/src || true
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: output # The folder the action should deploy.

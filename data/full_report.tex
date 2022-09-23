@@ -1,0 +1,488 @@
+
+% Save this as tutorial.tex for the lwarp package tutorial.
+
+\documentclass{book}
+
+\usepackage{iftex}
+
+% --- LOAD FONT SELECTION AND ENCODING BEFORE LOADING LWARP ---
+
+\ifPDFTeX
+\usepackage{lmodern}            % pdflatex or dvi latex
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\else
+\usepackage{fontspec}           % XeLaTeX or LuaLaTeX
+\fi
+
+% --- LWARP IS LOADED NEXT ---
+\usepackage[
+%   HomeHTMLFilename=index,     % Filename of the homepage.
+%   HTMLFilename={node-},       % Filename prefix of other pages.
+%   IndexLanguage=english,      % Language for xindy index, glossary.
+%   latexmk,                    % Use latexmk to compile.
+%   OSWindows,                  % Force Windows. (Usually automatic.)
+%   mathjax,                    % Use MathJax to display math.
+]{lwarp}
+% \boolfalse{FileSectionNames}  % If false, numbers the files.
+
+% --- LOAD PDFLATEX MATH FONTS HERE ---
+
+% --- OTHER PACKAGES ARE LOADED AFTER LWARP ---
+\usepackage{makeidx} \makeindex
+\usepackage{xcolor}             % (Demonstration purposes only.)
+\usepackage{hyperref,cleveref}  % LOAD THESE LAST!
+\usepackage[autostyle]{csquotes}
+\newcommand{\onlineCite}{[Online] Available: }	% Used in BIBLIOGRAPHY 
+\usepackage[backend=bibtex,sorting=none]{biblatex}	% Sort by citation order, IEEE
+\addbibresource{src/preamble/references.bib}
+
+% --- LATEX AND HTML CUSTOMIZATION ---
+\title{Stonk Research}
+\author{davidli012345@gmail.com}
+\setcounter{tocdepth}{2}        % Include subsections in the \TOC.
+\setcounter{secnumdepth}{2}     % Number down to subsections.
+\setcounter{FileDepth}{1}       % Split \HTML\ files at sections
+\booltrue{CombineHigherDepths}  % Combine parts/chapters/sections
+\setcounter{SideTOCDepth}{1}    % Include subsections in the side\TOC
+\HTMLTitle{Stonk Research}       % Overrides \title for the web page.
+\HTMLAuthor{David Li}        % Sets the HTML meta author tag.
+\HTMLLanguage{en-US}            % Sets the HTML meta language.
+\HTMLDescription{Publicly available stonk research from me.}% Sets the HTML meta description.
+\HTMLFirstPageTop{David Li}
+% \HTMLPageTop{\fbox{LOGO}}
+\HTMLPageBottom{Contact: davidli012345@gmail.com - This is just my personal thoughts, all the reference I use should be cited.}
+\CSSFilename{lwarp_sagebrush.css}
+
+\usepackage{graphicx}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.7}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+
+\begin{document}
+
+\maketitle                      % Or titlepage/titlingpage environment.
+
+% An article abstract would go here.
+
+ The reason I am using latex is to generate clean html documentation in lwarp with pdf support and citation + references. JupyterBook is a decent alternative.
+
+\tableofcontents                % MUST BE BEFORE THE FIRST SECTION BREAK!
+\listoffigures
+
+
+  \subsection{ 2022-09-20 pre }
+  %
+  \normalsize%
+  
+  
+  \begin{table}[htbp]%
+  \caption{MONDAY, SEPT. 19}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                    Report & Period & Actual & Median Forecast & Previous \\
+  \midrule
+      10 am & NAHB home builders' index &  Sept. &     46 &              47 &       49 \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{TUESDAY, SEPT. 20}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                  Report & Period &       Actual & Median Forecast &     Previous \\
+  \midrule
+    8:30 am & Building permits (SAAR) &   Aug. & 1.52 million &    1.62 million & 1.69 million \\
+    8:30 am &   Housing starts (SAAR) &   Aug. & 1.58 million &    1.50 million & 1.40 million \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{WEDNESDAY, SEPT. 21}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                                  Report & Period & Actual & Median Forecast &     Previous \\
+  \midrule
+      10 am &              Existing home sales (SAAR) &   Aug. &    NaN &    4.68 million & 4.81 million \\
+       2 pm &               Federal Reserve statement &    NaN &    NaN &              -- &   2.25-2.50\% \\
+    2:30 pm & Fed Chair Jerome Powell news conference &    NaN &    NaN &             NaN &          NaN \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{THURSDAY, SEPT. 22}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                             Report &   Period & Actual & Median Forecast &     Previous \\
+  \midrule
+    8:30 am &             Initial jobless claims & Sept. 17 &    NaN &          214000 &       213000 \\
+    8:30 am &          Continuing jobless claims & Sept. 10 &    NaN &              -- & 1.40 million \\
+    8:30 am & Current account deficit (\% of GDP) &       Q2 &    NaN &              -- &        -4.8\% \\
+      10 am &        Leading economic indicators &     Aug. &    NaN &           -0.1\% &        -0.4\% \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{FRIDAY, SEPT. 23}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                                             Report & Period & Actual & Median Forecast & Previous \\
+  \midrule
+    9:45 am &                 S\&P U.S. manufacturing PMI (flash) &  Sept. &    NaN &            51.4 &     51.5 \\
+    9:45 am &                      S\&P U.S. services PMI (flash) &  Sept. &    NaN &            46.0 &     43.7 \\
+       2 pm & FedListens event, moderated by Vice Chair Lael ... &    NaN &    NaN &             NaN &      NaN \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  \section{Reddit Posts}%
+  \label{sec:RedditPosts}%
+  
+  
+  \begin{table}[htbp]%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lll}
+  \toprule
+                                               title &                                                url & linkFlairText \\
+  \midrule
+  Honestly you don’t make more money by saving it... & https://reddit.com/r/wallstreetbets/comments/xj... &    Discussion \\
+  Fed Set to Reveal ‘Pain’ Coming in Next Stage o... & https://reddit.com/r/Economics/comments/xj6mue/... &          News \\
+                     Can I become the union leader ? & https://reddit.com/r/railroading/comments/xj49g... &           NaN \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+
+  \subsection{ 2022-09-21 pre }
+  %
+  \normalsize%
+  
+  
+  \begin{table}[htbp]%
+  \caption{MONDAY, SEPT. 19}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                    Report & Period & Actual & Median Forecast & Previous \\
+  \midrule
+      10 am & NAHB home builders' index &  Sept. &     46 &              47 &       49 \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{TUESDAY, SEPT. 20}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                  Report & Period &       Actual & Median Forecast &     Previous \\
+  \midrule
+    8:30 am & Building permits (SAAR) &   Aug. & 1.52 million &    1.62 million & 1.69 million \\
+    8:30 am &   Housing starts (SAAR) &   Aug. & 1.58 million &    1.50 million & 1.40 million \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{WEDNESDAY, SEPT. 21}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                                  Report & Period & Actual & Median Forecast &     Previous \\
+  \midrule
+      10 am &              Existing home sales (SAAR) &   Aug. &    NaN &    4.68 million & 4.81 million \\
+       2 pm &               Federal Reserve statement &    NaN &    NaN &              -- &   2.25-2.50\% \\
+    2:30 pm & Fed Chair Jerome Powell news conference &    NaN &    NaN &             NaN &          NaN \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{THURSDAY, SEPT. 22}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                             Report &   Period & Actual & Median Forecast &     Previous \\
+  \midrule
+    8:30 am &             Initial jobless claims & Sept. 17 &    NaN &          214000 &       213000 \\
+    8:30 am &          Continuing jobless claims & Sept. 10 &    NaN &              -- & 1.40 million \\
+    8:30 am & Current account deficit (\% of GDP) &       Q2 &    NaN &              -- &        -4.8\% \\
+      10 am &        Leading economic indicators &     Aug. &    NaN &           -0.1\% &        -0.4\% \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{FRIDAY, SEPT. 23}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                                             Report & Period & Actual & Median Forecast & Previous \\
+  \midrule
+    9:45 am &                 S\&P U.S. manufacturing PMI (flash) &  Sept. &    NaN &            51.4 &     51.5 \\
+    9:45 am &                      S\&P U.S. services PMI (flash) &  Sept. &    NaN &            46.0 &     43.7 \\
+       2 pm & FedListens event, moderated by Vice Chair Lael ... &    NaN &    NaN &             NaN &      NaN \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  \section{Reddit Posts}%
+  \label{sec:RedditPosts}%
+  
+  
+  \begin{table}[htbp]%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lll}
+  \toprule
+                                               title &                                                url & linkFlairText \\
+  \midrule
+        (NASDAQ-CM: \$INM) InMed Pharmaceuticals \{DD\} & https://reddit.com/r/Baystreetbets/comments/xjj... &            DD \\
+     What button do you think JPOW will press today? & https://reddit.com/r/StockMarket/comments/xk34a... &          Meme \\
+  The White House intervention to block rail stri... & https://reddit.com/r/railroading/comments/xjw0r... &           NaN \\
+                                  Tentative Language & https://reddit.com/r/railroading/comments/xjr4y... & Railroad News \\
+          Train Jacking in Sauk Rapids (St Cloud) MN & https://reddit.com/r/railroading/comments/xjndq... &          BNSF \\
+                                      Profit sharing & https://reddit.com/r/railroading/comments/xjn80... &    Discussion \\
+  The rail unions have violated our rights. Organ... & https://reddit.com/r/railroading/comments/xjkys... &           NaN \\
+                      Something to lighten the mood. & https://reddit.com/r/railroading/comments/xjh3q... & Miscellaneous \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+
+  \subsection{ 2022-09-22 pre }
+  %
+  \normalsize%
+  
+  
+  \begin{table}[htbp]%
+  \caption{MONDAY, SEPT. 19}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                    Report & Period & Actual & Median Forecast & Previous \\
+  \midrule
+      10 am & NAHB home builders' index &  Sept. &     46 &              47 &       49 \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{TUESDAY, SEPT. 20}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                  Report & Period &       Actual & Median Forecast &     Previous \\
+  \midrule
+    8:30 am & Building permits (SAAR) &   Aug. & 1.52 million &    1.62 million & 1.69 million \\
+    8:30 am &   Housing starts (SAAR) &   Aug. & 1.58 million &    1.50 million & 1.40 million \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{WEDNESDAY, SEPT. 21}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                                  Report & Period &       Actual & Median Forecast &     Previous \\
+  \midrule
+      10 am &              Existing home sales (SAAR) &   Aug. & 4.80 million &    4.68 million & 4.82 million \\
+       2 pm &               Federal Reserve statement &    NaN &   3.00-3.25\% &              -- &   2.25-2.50\% \\
+    2:30 pm & Fed Chair Jerome Powell news conference &    NaN &          NaN &             NaN &          NaN \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{THURSDAY, SEPT. 22}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                             Report &   Period &       Actual & Median Forecast &     Previous \\
+  \midrule
+    8:30 am &             Initial jobless claims & Sept. 17 &       213000 &          214000 &       208000 \\
+    8:30 am &          Continuing jobless claims & Sept. 10 & 1.38 million &              -- & 1.40 million \\
+    8:30 am & Current account deficit (\% of GDP) &       Q2 &        -4.0\% &              -- &        -4.6\% \\
+      10 am &        Leading economic indicators &     Aug. &          NaN &           -0.1\% &        -0.4\% \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+  \begin{table}[htbp]%
+  \caption{FRIDAY, SEPT. 23}%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lccccc}
+  \toprule
+  Time (ET) &                                             Report & Period & Actual & Median Forecast & Previous \\
+  \midrule
+    9:45 am &                 S\&P U.S. manufacturing PMI (flash) &  Sept. &    NaN &            51.4 &     51.5 \\
+    9:45 am &                      S\&P U.S. services PMI (flash) &  Sept. &    NaN &            46.0 &     43.7 \\
+       2 pm & FedListens event, Chair Jerome Powell opening r... &    NaN &    NaN &             NaN &      NaN \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  \section{Reddit Posts}%
+  \label{sec:RedditPosts}%
+  
+  
+  \begin{table}[htbp]%
+  \centering%
+  \begin{adjustbox}{width=1\textwidth}%
+  \begin{tabular}{lll}
+  \toprule
+                                               title &                                                url &   linkFlairText \\
+  \midrule
+                          Final Thesis For Equities. & https://reddit.com/r/wallstreetbets/comments/xl... &              DD \\
+  My gift to yuo, TD Highest Conviction Ideas for... & https://reddit.com/r/Baystreetbets/comments/xkp... &              DD \\
+                  HEIJMANS: an undervalued dutch gem & https://reddit.com/r/StockMarket/comments/xl1fa... & Fundamentals/DD \\
+  Gates Foundation announces \$1.27 billion financ... & https://reddit.com/r/Economics/comments/xkz8ju/... &            News \\
+  Railroaders furious after last week’s White Hou... & https://reddit.com/r/railroading/comments/xksw3... &             NaN \\
+  Midlands Voices: We must stop abandoning the Am... & https://reddit.com/r/railroading/comments/xklt6... &             NaN \\
+  Why do workers need Rank-and-File Committees? U... & https://reddit.com/r/railroading/comments/xkdfa... &             NaN \\
+                               Do you feel sold out? & https://reddit.com/r/railroading/comments/xkd6p... &             NaN \\
+  How my day started. 81 year old woman left her ... & https://reddit.com/r/railroading/comments/xk6j4... &          Carmen \\
+                             To Strike is OUR power. & https://reddit.com/r/railroading/comments/xk4lt... &             NaN \\
+                                            Who knew & https://reddit.com/r/railroading/comments/xk2s0... &   Miscellaneous \\
+                                    Watch the bushes & https://reddit.com/r/railroading/comments/xjsw4... &             CSX \\
+  \bottomrule
+  \end{tabular}
+  %
+  \end{adjustbox}%
+  \end{table}
+  
+  %
+  
+  
+
+
+\begin{warpprint}   % For print output ...
+\cleardoublepage    % ... a common method to place index entry into TOC.
+\phantomsection
+\addcontentsline{toc}{chapter}{\indexname}
+\end{warpprint}
+\ForceHTMLPage      % HTML index will be on its own page.
+\ForceHTMLTOC       % HTML index will have its own toc entry.
+\printindex
+
+\begin{warpprint}   % For print output ...
+\cleardoublepage    % ... a common method to place index entry into TOC.
+\phantomsection
+\end{warpprint}
+
+\nocite{*}
+\printbibliography
+
+% \glsaddall
+% \printglossaries
+
+\end{document}
