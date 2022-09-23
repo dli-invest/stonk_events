@@ -17,8 +17,7 @@ jobs:
           pip install -r requirements.txt
       - name: create full tex file
         run: |
-          cd src
-          python gen_full_report.py
+          python src/gen_full_report.py
 
       - name: Build Pdf
         run: |
