@@ -31,10 +31,6 @@ jobs:
           ./latexdockercmd.sh /bin/sh -c "lwarpmk htmlindex || true"
           ./latexdockercmd.sh /bin/sh -c "lwarpmk html || true" 
           ./latexdockercmd.sh /bin/sh -c "bibtex full_report_html"
-          ./latexdockercmd.sh /bin/sh -c "lwarpmk html1 || true" 
-          ./latexdockercmd.sh /bin/sh -c "lwarpmk limages || true"
-          ./latexdockercmd.sh /bin/sh -c "lwarpmk htmlindex || true" 
-          ./latexdockercmd.sh /bin/sh -c "bibtex full_report_html"
           ./latexdockercmd.sh /bin/sh -c "lwarpmk html1 || true"
           ./latexdockercmd.sh /bin/sh -c "lwarpmk html" 
           mv full_report.html index.html || true
