@@ -36,8 +36,7 @@ def main():
     # TODO integrate custom commands
     # eventually https://jeltef.github.io/PyLaTeX/current/examples/own_commands_ex.html
     reddit_posts = fetch_reddit_posts()
-    pd.set_option('display.max_colwidth', None)
-    pd.options.display.max_colwidth = 500 
+    # eventually do a md framed component per post
     if reddit_posts is not None and len(reddit_posts) > 0:
         df_posts = parse_reddit_posts(reddit_posts)
         # add reddit post to tex report
@@ -46,7 +45,7 @@ def main():
             doc.append(pl.NoEscape(r'\begin{adjustbox}{width=1\textwidth}'))
             # probably make some smartbox or text post instead.
             # In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
-            table.append(pl.NoEscape(df_posts.to_latex(escape=False, index=False, columns=['title', 'url', 'linkFlairText'], formatters=mk_reddit_formatters()))) 
+            table.append(pl.NoEscape(df_posts.to_latex(escape=False, index=False, columns=['title', 'url', 'linkFlairText']))) 
             doc.append(pl.NoEscape(r'\end{adjustbox}'))
 
     # make dirs files

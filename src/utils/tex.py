@@ -37,14 +37,17 @@ def extract_tex_from_file(input_file: str, output_file: str):
 
 
 def escape_latex(string: str):
-    return string.replace("_", r"\_").\
+    string = string.replace("_", r"\_").\
         replace("#", r"\#").\
         replace("%", r"\%").\
             replace("&", r"\&").\
                 replace("$", r"\$").replace("~", r"\~").\
                     replace("?","\\?").replace("^", r"\^").\
                         replace("...", r"\ldots").replace(">", r"\textgreater").\
-                            replace("<", r"\textless").replace("=", r"\textequal")
+                            replace("<", r"\textless").replace("=", r"\textequal").\
+                                replace("%", r"\%")
+
+    return string.replace("%", r"\%")
 
 
 def mk_reddit_url(raw_url: str):
