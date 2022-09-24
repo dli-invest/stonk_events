@@ -1,6 +1,7 @@
 # write_messages.py
 import re
 import glob
+from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
 
 
@@ -11,6 +12,7 @@ pattern = r'\\begin\{document\}(.*?)\\end\{document\}'
 
 reports = []
 # iterate through all tex files in data/reports/**/*.tex  using glob
+last_month = None
 for report_path in glob.glob("data/reports/**/*.tex"):
     # read tex file
     with open(report_path, "r", encoding="utf-8") as f:
@@ -18,17 +20,23 @@ for report_path in glob.glob("data/reports/**/*.tex"):
     # parse tex file
     # parse table captions
     report_content = re.findall(pattern, tex, re.DOTALL)
-    print(report_content)
     # check if contains pre or post
     # extract date from report_2022_09_22_pre.tex, grab 2022-09-22
     report_filename = report_path.split("/")[-1]
     report_date = "-".join(report_filename.split("_")[1:4])
     report_type = report_filename.split("_")[4].split(".")[0]
-    reports.append({
+    # add chapter if a new month is found, use datetime, format (%B)
+    curr_month = datetime.strptime(report_date, "YYYY-MM-DD").strftime("%B %Y")
+    report_data = {
         "report_type": report_type,
         "report_date": report_date,
-        "lines": report_content[0].split("\n")
-    })
+        "lines": report_content[0].split("\n"),
+        "chapter": False,   
+    }
+    if curr_month != last_month:
+        report_data["chapter"] = curr_month
+        last_month = curr_month
+    reports.append(report_data)
 
 context = {
     "reports": reports

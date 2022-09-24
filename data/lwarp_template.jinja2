@@ -74,6 +74,9 @@
 \listoftables
 
 {% for report in reports %}
+  {% if report.chapter == 'report' %}
+    \chapter{ {{ report.chapter }} }
+  {% endif %}
   \subsection{ {{ report.report_date }} {{ report.report_type }} }
   {% for line in report.lines %}{{ line }}
   {% endfor %}
