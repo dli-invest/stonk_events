@@ -30,7 +30,7 @@ jobs:
           ./latexdockercmd.sh /bin/sh -c "lwarpmk print"
           ./latexdockercmd.sh /bin/sh -c "lwarpmk htmlindex || true"
           ./latexdockercmd.sh /bin/sh -c "lwarpmk html || true" 
-          mv full_report.html index.html || true
+          cp full_report.html index.html || true
           mkdir output
           ls
           mv *.html output/ && mv *.css output/

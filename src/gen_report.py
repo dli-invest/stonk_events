@@ -5,7 +5,7 @@ import pandas as pd
 import datetime
 from marketwatch import split_tables
 from utils.parse_reddit import fetch_reddit_posts, parse_reddit_posts, make_dirs
-from utils.tex import mk_reddit_formatters
+from utils.tex import escape_latex
 
 def main():
 
@@ -40,13 +40,16 @@ def main():
     if reddit_posts is not None and len(reddit_posts) > 0:
         df_posts = parse_reddit_posts(reddit_posts)
         # add reddit post to tex report
-        with doc.create(pl.Table(position='htbp')) as table:
-            table.append(pl.Command('centering'))
-            doc.append(pl.NoEscape(r'\begin{adjustbox}{width=1\textwidth}'))
-            # probably make some smartbox or text post instead.
-            # In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
-            table.append(pl.NoEscape(df_posts.to_latex(escape=False, index=False, columns=['title', 'url', 'linkFlairText']))) 
-            doc.append(pl.NoEscape(r'\end{adjustbox}'))
+        with doc.create(pl.Itemize()) as itemize:
+            for index, row in df_posts.iterrows():
+                itemize.add_item(pl.NoEscape(r"\href{" + escape_latex(row['url']) + r"}{" + escape_latex(row['title']) + r"}," + escape_latex(row["linkFlairText"])))
+        # with doc.create(pl.Table(position='htbp')) as table:
+        #     table.append(pl.Command('centering'))
+        #     doc.append(pl.NoEscape(r'\begin{adjustbox}{width=1\textwidth}'))
+        #     # probably make some smartbox or text post instead.
+        #     # In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+        #     table.append(pl.NoEscape(df_posts.to_latex(escape=False, index=False, columns=['title', 'url', 'linkFlairText']))) 
+        #     doc.append(pl.NoEscape(r'\end{adjustbox}'))
 
     # make dirs files
     curr_month = datetime.datetime.now().strftime("%B")
