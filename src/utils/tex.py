@@ -3,11 +3,12 @@ import re
 import pandas as pd
 from pandas.plotting import table
 
+
 def extract_tex_from_file(input_file: str, output_file: str):
     """
     Extracts tex content from a file and writes it to a file.
     """
-        
+
     with open(input_file) as f:
         lines = f.readlines()
 
@@ -35,10 +36,20 @@ def extract_tex_from_file(input_file: str, output_file: str):
             f.write("".join(match))
 
 
-def mk_reddit_url(url: str):
+def escape_latex(string: str):
+    return string.replace("_", r"\_").\
+        replace("#", r"\#").\
+        replace("%", r"\%").\
+            replace("&", r"\&").\
+                replace("$", r"\$").replace("~", r"\~")
+
+
+def mk_reddit_url(raw_url: str):
+    url = escape_latex(raw_url)
     # strip https://www.reddit.com/r/ from url
-    subreddit_link =  url.replace("https://www.reddit.com/r/", "")
+    subreddit_link = url.replace("https://www.reddit.com/r/", "")
     return f"\\href{{{url}}}{{{subreddit_link}}}"
+
 
 def mk_reddit_formatters():
     return [
