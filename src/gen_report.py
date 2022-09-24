@@ -37,6 +37,7 @@ def main():
     # eventually https://jeltef.github.io/PyLaTeX/current/examples/own_commands_ex.html
     reddit_posts = fetch_reddit_posts()
     pd.set_option('display.max_colwidth', None)
+    pd.options.display.max_colwidth = 500 
     if reddit_posts is not None and len(reddit_posts) > 0:
         df_posts = parse_reddit_posts(reddit_posts)
         # add reddit post to tex report
