@@ -41,7 +41,8 @@ def escape_latex(string: str):
         replace("#", r"\#").\
         replace("%", r"\%").\
             replace("&", r"\&").\
-                replace("$", r"\$").replace("~", r"\~")
+                replace("$", r"\$").replace("~", r"\~").\
+                    replace("?","\\?").replace("^", r"\^")
 
 
 def mk_reddit_url(raw_url: str):
