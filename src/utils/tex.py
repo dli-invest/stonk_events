@@ -35,5 +35,18 @@ def extract_tex_from_file(input_file: str, output_file: str):
             f.write("".join(match))
 
 
+def mk_reddit_url(url: str):
+    # strip https://www.reddit.com/r/ from url
+    subreddit_link =  url.replace("https://www.reddit.com/r/", "")
+    return f"\\href{{{url}}}{{{subreddit_link}}}"
+
+def mk_reddit_formatters():
+    return [
+        lambda x: x,
+        mk_reddit_url,
+        lambda x: x,
+    ]
+
+
 if __name__ == "__main__":
     extract_tex_from_file("full.tex", "content.tex")

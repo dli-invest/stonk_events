@@ -3,7 +3,7 @@ name: Generate Premarket Report
 on:
   schedule:
     # make this report at 6 AM PST
-    - cron: '20 12 * * 1-5'
+    - cron: '20 12 * * 1-6'
   push:
     branches:
       - main
