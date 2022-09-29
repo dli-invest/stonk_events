@@ -29,9 +29,6 @@ def main():
                 doc.append(pl.NoEscape(r'\end{adjustbox}'))
         except Exception as e:
             print(e)
-            pass
-
-
     # PULL REDDIT DATA
     # TODO integrate custom commands
     # eventually https://jeltef.github.io/PyLaTeX/current/examples/own_commands_ex.html
