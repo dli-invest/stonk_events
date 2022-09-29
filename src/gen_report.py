@@ -13,6 +13,7 @@ def main():
 
     doc.packages.append(pl.Package('booktabs'))
     doc.packages.append(pl.Package('adjustbox'))
+    doc.packages.append(pl.Package("hyperref")))
 
     dfs, captions = split_tables()
     # MARKET EVENTS
