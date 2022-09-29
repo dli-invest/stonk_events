@@ -36,14 +36,22 @@ def extract_tex_from_file(input_file: str, output_file: str):
             f.write("".join(match))
 
 
+
+### escape latex
 def escape_latex(string: str):
-    return string.replace("_", r"\_").\
+    string = string.replace("_", r"\_").\
         replace("#", r"\#").\
         replace("%", r"\%").\
             replace("&", r"\&").\
                 replace("$", r"\$").replace("~", r"\~").\
                     replace("?",r"\?").replace("^", r"\^").\
                         replace("{", r"\{").replace("}", r"\}")
+    print(string)
+    # regex replace $ dollar
+    string = re.sub(r'(?<!\\)$', r'\$', string)
+    # regex replace _ underscore
+    string = re.sub(r'(?<!\\)_', r'\_', string)
+    return string
 
 
 
