@@ -39,18 +39,15 @@ def extract_tex_from_file(input_file: str, output_file: str):
 
 ### escape latex
 def escape_latex(string: str):
+    string = string.replace("!@#$%^&*()[]{};:,./<>?\|`~-=_+", " ")
     string = string.replace("_", r"\_").\
-        replace("#", r"\#").\
-        replace("%", r"\%").\
-            replace("&", r"\&").\
-                replace("$", r"\$").replace("~", r"\~").\
-                    replace("?",r"\?").replace("^", r"\^").\
-                        replace("{", r"\{").replace("}", r"\}")
-    print(string)
-    # regex replace $ dollar
-    string = re.sub(r'$', r'\$', string)
+    replace("#", r"\#").\
+    replace("%", r"\%").\
+        replace("&", r"\&").\
+            replace("$", r"\$").replace("~", r"\~").\
+                replace("?",r"\?").replace("^", r"\^").\
+                    replace("{", r"\{").replace("}", r"\}")
     # regex replace _ underscore
-    string = re.sub(r'_', r'\_', string)
     return string
 
 
