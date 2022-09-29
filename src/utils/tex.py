@@ -42,15 +42,19 @@ def escape_latex(value: Union[str, float]):
     # if value is a float, return it
     if isinstance(value, float):
         return value
-    final_string = value.replace("_", r"\_").\
-    replace("#", r"\#").\
-    replace("%", r"\%").\
-        replace("&", r"\&").\
-            replace("$", r"\$").replace("~", r"\~").\
-                replace("?",r"\?").replace("^", r"\^").\
-                    replace("{", r"\{").replace("}", r"\}")
     # regex replace _ underscore
-    return final_string
+    return (
+        value.replace("_", r"\_")
+        .replace("#", r"\#")
+        .replace("%", r"\%")
+        .replace("&", r"\&")
+        .replace("$", r"\$")
+        .replace("~", r"\~")
+        .replace("?", r"\?")
+        .replace("^", r"\^")
+        .replace("{", r"\{")
+        .replace("}", r"\}")
+    )
 
 
 
