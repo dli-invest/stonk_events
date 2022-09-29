@@ -52,8 +52,6 @@ def escape_latex(value: Union[str, float]):
         .replace("%", r"\%")
         .replace("&", r"\&")
         .replace("$", r"\$")
-        .replace("~", r"\~")
-        .replace("?", r"\?")
         .replace("^", r"\^")
         .replace("{", r"\{")
         .replace("}", r"\}")
