@@ -43,8 +43,11 @@ def escape_latex(value: Union[str, float]):
     if isinstance(value, float):
         return value
     # regex replace _ underscore
+
+    # remove unicode characters
+    escaped_str = value.encode("ascii", "ignore").decode()
     return (
-        value.replace("_", r"\_")
+        escaped_str.replace("_", r"\_")
         .replace("#", r"\#")
         .replace("%", r"\%")
         .replace("&", r"\&")
