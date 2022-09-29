@@ -48,9 +48,9 @@ def escape_latex(string: str):
                         replace("{", r"\{").replace("}", r"\}")
     print(string)
     # regex replace $ dollar
-    string = re.sub(r'(?<!\\)$', r'\$', string)
+    string = re.sub(r'$', r'\$', string)
     # regex replace _ underscore
-    string = re.sub(r'(?<!\\)_', r'\_', string)
+    string = re.sub(r'_', r'\_', string)
     return string
 
 
