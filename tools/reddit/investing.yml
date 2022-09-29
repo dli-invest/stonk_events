@@ -27,7 +27,7 @@ data:
       limit: 10
       minScore: 20
       minComments: 10
-    - name: railroading
-      limit: 10
-      minScore: 10
-      minComments: 5
+    # - name: railroading
+    #   limit: 10
+    #   minScore: 10
+    #   minComments: 5
