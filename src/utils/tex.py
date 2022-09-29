@@ -1,5 +1,5 @@
 import re
-
+from typing import Union
 import pandas as pd
 from pandas.plotting import table
 
@@ -38,9 +38,11 @@ def extract_tex_from_file(input_file: str, output_file: str):
 
 
 ### escape latex
-def escape_latex(string: str):
-    string = string.replace("!@#$%^&*()[]{};:,./<>?\|`~-=_+", " ")
-    string = string.replace("_", r"\_").\
+def escape_latex(value: Union[str, float]):
+    # if value is a float, return it
+    if isinstance(value, float):
+        return value
+    final_string = value.replace("_", r"\_").\
     replace("#", r"\#").\
     replace("%", r"\%").\
         replace("&", r"\&").\
@@ -48,7 +50,7 @@ def escape_latex(string: str):
                 replace("?",r"\?").replace("^", r"\^").\
                     replace("{", r"\{").replace("}", r"\}")
     # regex replace _ underscore
-    return string
+    return final_string
 
 
 
