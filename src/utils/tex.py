@@ -42,7 +42,8 @@ def escape_latex(string: str):
         replace("%", r"\%").\
             replace("&", r"\&").\
                 replace("$", r"\$").replace("~", r"\~").\
-                    replace("?",r"\?").replace("^", r"\^")
+                    replace("?",r"\?").replace("^", r"\^").\
+                        replace("{", r"\{").replace("}", r"\}")
 
 
 
