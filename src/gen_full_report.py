@@ -36,6 +36,7 @@ for report_path in glob.glob("data/reports/**/*.tex"):
     if curr_month != last_month:
         report_data["chapter"] = curr_month
         last_month = curr_month
+    # move images files in img folder to data/reports/img, this is for monthly reports
     reports.append(report_data)
 
 context = {

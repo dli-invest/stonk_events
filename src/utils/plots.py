@@ -110,6 +110,4 @@ def make_buffett_indicator(start_time='2000-01-01'):
   # )
   return fig
 
-fig = make_buffett_indicator()
-fig.write_image("fig1.png")
 

@@ -8,9 +8,10 @@ from math import log10
 from scipy.signal import argrelextrema
 from scipy.signal import find_peaks
 
-def plot_lower_bound_index(index = "^GSPC"):
+
+def plot_index_with_bounds(index = "^GSPC"):
     # read S&P 500 data from 2000
-    df = yfinance.download('^GSPC', start='1910-01-01', end='2022-09-30', interval="1mo")
+    df = yfinance.download(index, start='1910-01-01', end='2022-09-30', interval="1mo")
     fig, ax = plt.subplots()
     ax.plot(df.index, df['Adj Close'], color='black')
     ax.set_yscale("log")
@@ -52,7 +53,7 @@ def plot_lower_bound_index(index = "^GSPC"):
 
     # mx+b for local_max
     last_min_point = new_df.iloc[local_min[-1]]
-    first_min_point = new_df.iloc[local_min[8]]
+    first_min_point = new_df.iloc[local_min[0]]
     # draw line between last_min_point and first_min_point
     # y = mx + b
     m = (last_min_point['Adj Close'] - first_min_point['Adj Close']) / (last_min_point['Date'] - first_min_point['Date'])
@@ -72,18 +73,4 @@ def plot_lower_bound_index(index = "^GSPC"):
     b = last_max_point['Adj Close'] - m * last_max_point['Date']
     # convert this to a percent of the max ylim
     ax2.plot(new_df['Date'], m * new_df["Date"] + b+3500, color='red')
-    # best_fit = np.polyfit(np.log(new_df["Date"][local_min]), np.log10(new_df['Adj Close'][local_min]), 1)
-    # draw lines through local_min points
-    # best_fit = np.polyfit(np.log(df.index[local_min]), np.log(df['Adj Close'][local_min]), 1)
-    # plot best_fit line
-    # print(best_fit)
-
-    # best_Fit_series = best_fit[0] * new_df["Date"] + best_fit[1]
-    # log 10 entire line
-    # best_Fit_series = np.log10(best_Fit_series)
-    # ax.plot(new_df["Date"], best_fit[0] * new_df["Date"] + best_fit[1], color='black')
-
-
-    # plot line going through local_min
-    # plot line going through local_max
-    fig.savefig('sp500_log.png', dpi=300, bbox_inches='tight')
+    fig.savefig(f'{index}_log.png', dpi=300, bbox_inches='tight')
