@@ -1,3 +1,5 @@
+import sys
+
 # all tex related stuff is in src/tex.py
 import numpy as np
 import pylatex as pl
