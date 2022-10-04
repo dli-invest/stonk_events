@@ -4,3 +4,5 @@ lxml
 pylatex
 jinja2
 requests
+plotly
+numpy

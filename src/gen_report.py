@@ -49,6 +49,7 @@ def main():
         #     table.append(pl.NoEscape(df_posts.to_latex(escape=False, index=False, columns=['title', 'url', 'linkFlairText']))) 
         #     doc.append(pl.NoEscape(r'\end{adjustbox}'))
 
+    # make images
     # make dirs files
     curr_month = datetime.datetime.now().strftime("%B")
     base_folder = f"../data/reports/{curr_month}"
