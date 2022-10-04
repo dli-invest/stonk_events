@@ -51,7 +51,7 @@ def make_buffett_indicator(start_time='2000-01-01'):
   min_date = combined.index.to_pydatetime()[0]
   max_date = combined.index.to_pydatetime()[-1]
   num_dates = len(combined.index.to_pydatetime())
-  quarter_date = combined.index.to_pydatetime()[int(num_dates/4)]
+  quarter_date = combined.index.to_pydatetime()[num_dates // 4]
   three_quarter_date = combined.index.to_pydatetime()[int(3*num_dates/4)]
   # horizontal line
   shapes=[
