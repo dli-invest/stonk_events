@@ -37,8 +37,7 @@ jobs:
       - run: go version
       - name: Generate Premarket Report
         run: |
-          cd src
-          python gen_report.py
+          python src/gen_report.py
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
