@@ -1,0 +1,15 @@
+economy
+
+# print all the statements here
+
+overview --export csv
+
+overview indices --export csv
+
+overview usbonds --export csv
+
+overview glbonds --export csv
+
+overview currencies --export csv
+
+exit
