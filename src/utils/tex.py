@@ -41,7 +41,7 @@ def extract_tex_from_file(input_file: str, output_file: str):
 def escape_latex(value: Union[str, float]):
     # if value is a float, return it
     if isinstance(value, float):
-        return value
+        return f"{value}"
     # regex replace _ underscore
 
     # remove unicode characters
