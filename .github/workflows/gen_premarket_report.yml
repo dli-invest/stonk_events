@@ -31,6 +31,7 @@ jobs:
           cd src
           pip install -r requirements.txt
           cd ../OpenBBTerminal
+          ls
           pip install -r requirements.txt
 
       - uses: actions/setup-go@v3
