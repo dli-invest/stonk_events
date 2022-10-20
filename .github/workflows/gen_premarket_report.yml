@@ -73,6 +73,11 @@ jobs:
         run:
           python src/send_discord.py
 
+      - name: Upload file to deta space
+        run:
+          # remove latest.pdf to current date 
+          python src/upload_to_deta.py latest.pdf $(date +%Y-%m-%d).pdf
+
 
       - uses: sarisia/actions-status-discord@v1
         if: failure()
