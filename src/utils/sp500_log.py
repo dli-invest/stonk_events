@@ -8,7 +8,7 @@ from math import log10
 from scipy.signal import argrelextrema
 from scipy.signal import find_peaks
 
-
+# For the monthly report?
 def plot_index_with_bounds(index = "^GSPC"):
     # read S&P 500 data from 2000
     df = yfinance.download(index, start='1910-01-01', end='2022-09-30', interval="1mo")

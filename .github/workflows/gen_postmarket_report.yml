@@ -1,9 +1,9 @@
 # setup python and setup golang github actions
-name: Generate Premarket Report
+name: Generate Postmarket Report
 on:
   schedule:
-    # make this report at 6 AM PST
-    - cron: '20 12 * * 1-6'
+    # make this report at 2:30 PM PST
+    - cron: '30 20 * * *'
   push:
     branches:
       - main
@@ -31,22 +31,23 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           cd src
-          pip install -r requirements.txt
-          cd ../OpenBBTerminal
-          ls
-          pip install -r requirements.txt
+          pip install -r requirements.core.txt
+          pip install -r requirements.post.txt
+        # cd ../OpenBBTerminal
+        # ls
+        # pip install -r requirements.txt
 
       - uses: actions/setup-go@v3
         with:
           go-version: '>=1.17.0'
       - run: go version
-      - name: Generate Premarket Report
+      - name: Generate Postmarket Report
         run: |
-          python src/gen_prereport.py
+          python src/gen_postreport.py
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Update Premarket Report"
+          commit_message: "Update Postmarket Report"
           commit_options: '--no-verify'
           commit_user_name: github-actions
           
@@ -76,7 +77,8 @@ jobs:
       - name: Upload file to deta space
         run:
           # remove latest.pdf to current date 
-          python src/upload_to_deta.py latest.pdf $(date +%Y-%m-%d)_pre.pdf
+          python src/upload_to_deta.py latest.pdf $(date +%Y-%m-%d)_post.pdf
+
 
       - uses: sarisia/actions-status-discord@v1
         if: failure()
@@ -84,7 +86,7 @@ jobs:
           webhook: ${{ secrets.DISCORD_CODE_STATUS_WEBHOOK }}
           status: ${{ job.status }}
           title: ${{github.repository}}
-          description: "Failed to generate premarket report"
+          description: "Failed to generate postmarket report"
           nofail: false
           noprefix: false
           color: 0xff0000

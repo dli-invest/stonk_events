@@ -43,7 +43,7 @@ def main():
         # add reddit post to tex report
         with doc.create(pl.Itemize()) as itemize:
             for index, row in df_posts.iterrows():
-                itemize.add_item(pl.NoEscape(r"\href{" + escape_latex(row['url']) + r"}{" + escape_latex(row['title']) + r"}," + escape_latex(row["linkFlairText"])))
+                itemize.add_item(pl.utils.escape_latex(r"\href{" + row['url'] + r"}{" + row['title']) + r"}," + row["linkFlairText"])
         # with doc.create(pl.Table(position='htbp')) as table:
         #     table.append(pl.Command('centering'))
         #     doc.append(pl.NoEscape(r'\begin{adjustbox}{width=1\textwidth}'))
