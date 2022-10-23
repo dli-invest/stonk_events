@@ -46,6 +46,7 @@ def main():
             # read current date from row["created_at"] and format as HH:MM:SS
             current_date = datetime.datetime.strptime(row["created_at"], "%Y-%m-%d %H:%M:%S").strftime("%H:%M:%S")
             doc.append(pl.utils.bold(current_date))
+            doc.append(pl.basic.NewLine())
             doc.append(pl.escape_latex(summary))
             # summarize text
             # add summary to doc
