@@ -72,7 +72,7 @@ jobs:
       #     file: data/latest.pdf
       - name: Send report to discord
         run:
-          python src/send_discord.py
+          python src/send_discord.py --content "Postmarket Report" --username "stonk_events"
 
       - name: Upload file to deta space
         run:
