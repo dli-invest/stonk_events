@@ -85,6 +85,7 @@ jobs:
       - name: Upload file to deta space
         run:
           # remove latest.pdf to current date 
+          ls latest.pdf
           python src/upload_to_deta.py latest.pdf $(date +%Y-%m-%d)_post.pdf
 
 
