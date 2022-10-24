@@ -51,7 +51,7 @@ def main():
             current_date = datetime.datetime.strptime(row["created_at"], "%Y-%m-%d %H:%M:%S").strftime("%H:%M:%S")
             doc.append(pl.utils.bold(current_date))
             doc.append(pl.basic.NewLine())
-            doc.append(pl.escape_latex(summary))
+            doc.append(summary)
             # summarize text
             # add summary to doc
             # clear text_to_analyze
