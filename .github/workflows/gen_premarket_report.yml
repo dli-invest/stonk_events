@@ -15,6 +15,7 @@ env:
   REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
   REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
   DISCORD_WEBHOOK: ${{ secrets.DISCORD_URGENT_NOTIFICATIONS_WEBHOOK}}
+  DETA_TOKEN: ${{ secrets.DETA_TOKEN }}
 
 jobs:
   build:
