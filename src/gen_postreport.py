@@ -33,7 +33,11 @@ def main():
     file_to_access = f"https://raw.githubusercontent.com/dli-invest/fdrtt-stream/main/data/Bloomberg/{rel_date}/bloomberg_{day}.csv"
 
     # load file as csv 
-    df = pd.read_csv(file_to_access)
+    try:
+        df = pd.read_csv(file_to_access)
+    except Exception as e:
+        print(e)
+        df = pd.DataFrame()
 
     text_to_analyze = []
     # iterate across text and then use sumpy to summarize
