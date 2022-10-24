@@ -50,8 +50,8 @@ jobs:
         run: |
           git stash
           git config --global pull.rebase false
-          git pull
-          git stash pop
+          git pull -X theirs
+          git cherry-pick -n -m1 -Xtheirs stash
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
