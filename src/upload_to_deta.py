@@ -15,6 +15,7 @@ if __name__ == "__main__":
     deta = Deta(os.environ["DETA_TOKEN"])
 
     drive = deta.Drive("stonk_events")
-    with open(args.file, "r", encoding="utf-8") as f:
+    print(args.file)
+    with open(args.file, "rb") as f:
         drive.put(args.report_name, f)
         f.close()

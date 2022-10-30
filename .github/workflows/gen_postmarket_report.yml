@@ -64,6 +64,7 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: data/latest.tex
+          args: -interaction=nonstopmode
 
       - name: upload artifacts
         uses: actions/upload-artifact@v2
