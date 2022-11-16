@@ -65,6 +65,7 @@ jobs:
         with:
           root_file: data/latest.tex
           args: -interaction=nonstopmode
+          latexmk_use_lualatex: true
 
       - name: upload artifacts
         uses: actions/upload-artifact@v2
