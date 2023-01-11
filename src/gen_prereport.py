@@ -8,7 +8,7 @@ import datetime
 from marketwatch import split_tables
 from utils.parse_reddit import fetch_reddit_posts, parse_reddit_posts, make_dirs
 from utils.tex import escape_latex
-from utils.openbb import openbb_economy
+from utils.openbb_data import openbb_economy
 
 def main():
 

@@ -33,9 +33,6 @@ jobs:
           python -m pip install --upgrade pip
           cd src
           pip install -r requirements.core.txt
-          cd ../OpenBBTerminal
-          ls
-          pip install -r requirements.txt
 
       - uses: actions/setup-go@v3
         with:

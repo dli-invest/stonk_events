@@ -7,3 +7,4 @@ requests
 plotly
 numpy
 deta
+openbb==2.1.0
