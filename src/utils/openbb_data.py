@@ -2,11 +2,8 @@ import subprocess
 import pandas as pd
 from openbb_terminal.economy.wsj_model import market_overview, us_indices, us_bonds, top_commodities, global_bonds, global_currencies
 
-# openbb.economy.overview
-# openbb.economy.indices
-# openbb.economy.usbonds
-# openbb.economy.glbonds
-# openbb.economy.currencies
+def weekly_lows():
+    # 52 week low
 def openbb_economy():
     """Open the Blackboard website in the default web browser."""
     economy_dfs = []
