@@ -8,7 +8,7 @@ import datetime
 from marketwatch import split_tables
 from utils.parse_reddit import fetch_reddit_posts, parse_reddit_posts, make_dirs
 from utils.tex import escape_latex
-from utils.openbb_data import openbb_economy
+from utils.openbb_data import openbb_economy, weekly_lows
 
 def main():
 
@@ -17,7 +17,15 @@ def main():
     doc.packages.append(pl.Package('booktabs'))
     doc.packages.append(pl.Package('adjustbox'))
     doc.packages.append(pl.Package("hyperref"))
-
+    weekly_low_df = weekly_lows()
+    column_format = 'l' + 'c' * (len(weekly_low_df.columns) - 1)
+    tex_table = weekly_low_df.to_latex(escape=True, index=False, column_format=column_format)
+    with doc.create(pl.Table(position='htbp')) as table:
+        table.add_caption(captions[index])
+        table.append(pl.Command('centering'))
+        doc.append(pl.NoEscape(r'\begin{adjustbox}{width=1\textwidth}'))
+        table.append(pl.NoEscape(tex_table))
+        doc.append(pl.NoEscape(r'\end{adjustbox}'))
     dfs, captions = split_tables()
     # MARKET EVENTS
     for index, df in enumerate(dfs):

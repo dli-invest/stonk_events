@@ -6,6 +6,7 @@ from openbb_terminal.economy.wsj_model import market_overview, us_indices, us_bo
 def weekly_lows():
     # 52 week low
     new_low_df = openbb.stocks.screener.screener_data(preset_loaded='new_low', data_type = 'overview')
+    return new_low_df 
 
 
 def openbb_economy():
